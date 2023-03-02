@@ -1,0 +1,234 @@
+﻿@model SupplyChainManagement.ViewModels.Home.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/tiles.css" />
+
+<div class="dashboard">
+    <h4>Dashboard</h4>
+
+    <!-- Widgets -->
+    <div class="row my-3">
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib" style="color: #00c292;">
+                            <i class="pe-7s-cash"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text">Rs. <span class="count">@Model.Profit</span></div>
+                                <div class="stat-heading">Revenue @DateTime.Today.Year</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib" style="color: #ab8ce4;">
+                            <i class="pe-7s-cart"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">@Model.TotalOrders</span></div>
+                                <div class="stat-heading">Orders</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib" style="color: #03a9f3;">
+                            <i class="pe-7s-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">@Model.TotalSuppliers</span></div>
+                                <div class="stat-heading">Suppliers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib" style="color: #fb9678;">
+                            <i class="pe-7s-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">@Model.TotalCustomers</span></div>
+                                <div class="stat-heading">Customers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Chart -->
+    @*<div class="row" style="align-items: stretch;">
+    <div class="col-lg-8">
+    <div class="card">
+    <div class="card-body">
+    <h4 class="box-title">Orders</h4>
+    </div>
+    <div class="row">
+    <div class="card-body">
+    <canvas id="ordersChart"></canvas>
+    </div>
+    </div> <!-- /.row -->
+    <div class="card-body"></div>
+    </div>
+    </div><!-- /# column -->
+
+    <div class="col-lg-4">
+    <div class="card">
+    <div class="card-body">
+    <h4 class="box-title">Products</h4>
+    </div>
+    <div class="row">
+    <div class="card-body">
+    <canvas id="productsChart"></canvas>
+    </div>
+    </div> <!-- /.row -->
+    <div class="card-body"></div>
+    </div>
+    </div><!-- /# column -->
+    </div>*@
+
+    <div style="display: flex; gap: 1.5rem;">
+        <div style="display: flex; flex: 1;">
+            <div class="card" style="flex: 1;">
+                <div class="card-body">
+                    <h4 class="box-title">Number of Orders @DateTime.Today.Year</h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="ordersChart"></canvas>
+                </div>
+            </div>
+        </div><!-- /# column -->
+
+        <div style="display: flex;">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="box-title">Products</h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="productsChart"></canvas>
+                </div>
+            </div>
+        </div><!-- /# column -->
+    </div>
+
+
+</div>
+
+@section Scripts {
+    <script>
+        const orderCtx = document.getElementById('ordersChart').getContext('2d');
+        const months = @Html.Raw(Json.Serialize(Model.OrderBarChart.Months));
+        const ordersCount = @Html.Raw(Json.Serialize(Model.OrderBarChart.OrdersCount));
+        const orderChart = new Chart(orderCtx, {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: '# of Orders',
+                    data: ordersCount,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const productCtx = document.getElementById('productsChart').getContext('2d');
+        const productNames = @Html.Raw(Json.Serialize(Model.ProductPieChart.ProductNames));
+        const productQuantities = @Html.Raw(Json.Serialize(Model.ProductPieChart.ProductQuantities));
+        const productChart = new Chart(productCtx, {
+            type: 'pie',
+            data: {
+                labels: productNames,
+                datasets: [{
+                    label: '# of Votes',
+                    data: productQuantities,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}

@@ -1,0 +1,61 @@
+﻿@model SupplyChainManagement.ViewModels.Products.ProductCreateViewModel
+
+@{
+}
+
+<div class="page page--form">
+    <div class="page-title d-flex align-items-center gap-3 ">
+        <h3>Create Product</h3>
+    </div>
+    <form class="form" method="post" asp-controller="Products" asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="ProductCode" class="form-label">Product Code</label>
+            <input type="text" class="form-control" asp-for="ProductCode" placeholder="Product Code">
+            <span class="text-danger" asp-validation-for="ProductCode"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductName" class="form-label">Product Name</label>
+            <input type="text" class="form-control" asp-for="ProductName" placeholder="Product Name">
+            <span class="text-danger" asp-validation-for="ProductName"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Date" class="form-label">Date</label>
+            <input type="date" class="form-control" asp-for="Date">
+            <span class="text-danger" asp-validation-for="Date"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Category" class="form-label">Category</label>
+            <select class="form-select" asp-for="Category" asp-items="Html.GetEnumSelectList<Category>()">
+                <option value="">-- Select --</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Category"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Quantity" class="form-label">Quantity</label>
+            <input type="number" class="form-control" asp-for="Quantity" placeholder="Quantity">
+            <span class="text-danger" asp-validation-for="Quantity"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SellingPrice" class="form-label">Selling Price</label>
+            <input type="number" class="form-control" asp-for="SellingPrice" placeholder="Selling Price">
+            <span class="text-danger" asp-validation-for="SellingPrice"></span>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Add Product</button>
+            <button type="reset" class="btn btn-danger">Clear</button>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+ }
+}

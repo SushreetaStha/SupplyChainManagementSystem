@@ -1,0 +1,34 @@
+﻿@model SupplyChainManagement.ViewModels.Orders.OrderIndexViewModel
+@{
+}
+
+<div class="page">
+    <div class="page-title d-flex align-items-center gap-3">
+        <h3>List Orders</h3>
+    </div>
+    <a class="btn btn-primary" asp-controller="Orders" asp-action="Create">+ New Order</a>
+    <a class="btn btn-success" asp-controller="Orders" asp-action="Index">Unshipped Orders</a>
+    <table class="dashboard-table table table-bordered table-striped mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col" class="text-center">Code</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.OrderDetails)
+            {
+                <tr>
+                    <td>@order.OrderDate.ToShortDateString()</td>
+                    <td class="text-center">@order.OrderCode</td>
+                    <td>@order.CustomerName</td>
+                    <td>
+                        <a asp-controller="Orders" asp-action="ShippedOrderItems" asp-route-id="@order.OrderId" class="btn btn-primary">Items</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

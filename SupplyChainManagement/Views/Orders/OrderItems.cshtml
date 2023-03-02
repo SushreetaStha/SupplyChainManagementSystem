@@ -1,0 +1,48 @@
+﻿@model SupplyChainManagement.ViewModels.Orders.OrderItemsViewModel
+
+@{
+}
+
+<div class="page">
+    <div class="page-title d-flex align-items-center gap-3">
+        <h3>Ordered Items - @Model.CustomerName</h3>
+    </div>
+    <table class="dashboard-table table table-bordered table-striped mt-4">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Product Name</th>
+                <th scope="col" class="text-center">Quantity</th>
+                <th scope="col" class="text-center">Price (Kg)</th>
+                <th scope="col" class="text-center">Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var trn in Model.OrderItems)
+            {
+                <tr>
+                    <td class="text-center">@trn.ProductName</td>
+                    <td class="text-center">
+                        @if (trn.OrderPending >= 0)
+                        {
+                            <span class="text-success fw-bolder">@trn.OrderQuantity (in stock)</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger fw-bolder">
+                                @trn.OrderQuantity (@Math.Abs(trn.OrderPending) in Pending)
+                            </span>
+                        }
+                    </td>
+                    <td class="text-center">@trn.SellingPrice</td>
+                    <td class="text-center">@(trn.OrderQuantity * @trn.SellingPrice)</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th style="text-align: right;" colspan="3">Grand Total</th>
+                <th class="text-center">@Model.GrandTotal</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

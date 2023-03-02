@@ -1,0 +1,44 @@
+﻿@model SupplyChainManagement.ViewModels.Users.AuthenticateRequest
+
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>SCMS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/bootstrap-icons.css" />
+</head>
+<body style="background-color: rgba(0, 0, 0, 0.05);">
+    <div class="login-page" style="margin-top: 8rem;">
+        <div class="page login--form" @* style="margin-top: 8rem;"*@>
+            <div class="page-title d-flex align-items-center gap-3">
+                <h3>Login</h3>
+            </div>
+            <form class="form" method="post" asp-controller="Users" asp-action="SignIn">
+                <div class="mb-3">
+                    <label asp-for="Username" class="form-label">Username</label>
+                    <input type="text" class="form-control" asp-for="Username" placeholder="Username">
+                    <span class="text-danger" asp-validation-for="Username"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input type="password" class="form-control" asp-for="Password" placeholder="Password">
+                    <span class="text-danger" asp-validation-for="Password"></span>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

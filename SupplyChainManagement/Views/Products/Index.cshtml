@@ -1,0 +1,72 @@
+﻿@model List<Product>
+
+@{
+}
+
+<div class="page">
+    <div class="page-title d-flex align-items-center gap-3">
+        <h3>List Products</h3>
+    </div>
+    <a class="btn btn-primary" asp-controller="Products" asp-action="Create">+ New Product</a>
+
+    <table class="dashboard-table table table-bordered table-striped mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Code</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Quantity (Kg)</th>
+                <th scope="col">Selling Price (per Kg)</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Date.ToShortDateString()</td>
+                    <td>@product.ProductCode</td>
+                    <td>@product.ProductName</td>
+                    <td>@product.Category</td>
+                    <td>@product.Quantity</td>
+                    <td>@product.SellingPrice</td>
+                    <td>
+                        <a class="btn btn-success" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id">Edit</a>
+                        <a class="btn btn-danger delete-btn" asp-controller="Products"
+                       asp-action="Delete" asp-route-id="@product.Id" data-id="@product.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Delete Modal -->
+<partial name="Partial/_PartialDeleteModal" />
+
+@section Scripts {
+<script type="text/javascript">
+    $(".delete-btn").on("click", function() {
+        event.preventDefault();
+        $("#confirmDelete").attr("data-id", $(this).attr("data-id"));
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.toggle();
+    });
+
+    $("#confirmDelete").on("click", function() {
+        const url = "/Products/Delete";
+        const id = $("#confirmDelete").attr("data-id");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { id },
+            success: function(res) {
+                if (res.success) {
+                    location.href = "/Products";
+                }
+            }
+        });
+    });
+</script>
+}

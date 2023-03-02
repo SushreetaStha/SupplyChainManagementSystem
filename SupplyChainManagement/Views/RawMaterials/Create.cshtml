@@ -1,0 +1,53 @@
+﻿@model SupplyChainManagement.ViewModels.RawMaterials.RawMaterialCreateViewModel
+
+@{
+}
+
+<div class="page page--form">
+    <div class="page-title d-flex align-items-center gap-3">
+        <h3>Create Raw Material</h3>
+    </div>
+    <form class="form" method="post" asp-controller="RawMaterials" asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="MaterialCode" class="form-label">Material Code</label>
+            <input type="text" class="form-control" asp-for="MaterialCode" placeholder="Material Code">
+            <span class="text-danger" asp-validation-for="MaterialCode"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MaterialName" class="form-label">Material Name</label>
+            <input type="text" class="form-control" asp-for="MaterialName" placeholder="Material Name">
+            <span class="text-danger" asp-validation-for="MaterialName"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Date" class="form-label">Date</label>
+            <input type="date" class="form-control" asp-for="Date">
+            <span class="text-danger" asp-validation-for="Date"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Quantity" class="form-label">Quantity</label>
+            <input type="number" class="form-control" asp-for="Quantity" placeholder="Quantity">
+            <span class="text-danger" asp-validation-for="Quantity"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CostPrice" class="form-label">Cost Price</label>
+            <input type="number" class="form-control" asp-for="CostPrice" placeholder="Cost Price">
+            <span class="text-danger" asp-validation-for="CostPrice"></span>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Add Raw Material</button>
+            <button type="reset" class="btn btn-danger">Clear</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+ }
+}

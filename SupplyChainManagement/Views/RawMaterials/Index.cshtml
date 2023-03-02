@@ -1,0 +1,70 @@
+﻿@model List<RawMaterial>
+
+@{
+}
+
+<div class="page">
+    <div class="page-title d-flex align-items-center gap-3">
+        <h3>List Raw Materials</h3>
+    </div>
+    <a class="btn btn-primary" asp-controller="RawMaterials" asp-action="Create">+ Add Raw Material</a>
+
+    <table class="dashboard-table table table-bordered table-striped mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Code</th>
+                <th scope="col">Material Name</th>
+                <th scope="col">Quantity (Kg)</th>
+                <th scope="col">Cost Price (per Kg)</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var material in Model)
+            {
+                <tr>
+                    <td>@material.Date.ToShortDateString()</td>
+                    <td>@material.MaterialCode</td>
+                    <td>@material.MaterialName</td>
+                    <td>@material.Quantity</td>
+                    <td>@material.CostPrice</td>
+                    <td>
+                        <a class="btn btn-success" asp-controller="RawMaterials" asp-action="Edit" asp-route-id="@material.Id">Edit</a>
+                        <a class="btn btn-danger delete-btn" asp-controller="RawMaterials"
+                       asp-action="Delete" asp-route-id="@material.Id" data-id="@material.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Delete Modal -->
+<partial name="Partial/_PartialDeleteModal" />
+
+@section Scripts {
+<script type="text/javascript">
+    $(".delete-btn").on("click", function() {
+        event.preventDefault();
+        $("#confirmDelete").attr("data-id", $(this).attr("data-id"));
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.toggle();
+    });
+
+    $("#confirmDelete").on("click", function() {
+        const url = "/RawMaterials/Delete";
+        const id = $("#confirmDelete").attr("data-id");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { id },
+            success: function(res) {
+                if (res.success) {
+                    location.href = "/RawMaterials";
+                }
+            }
+        });
+    });
+</script>
+}

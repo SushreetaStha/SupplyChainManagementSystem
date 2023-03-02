@@ -1,0 +1,45 @@
+﻿@model SupplyChainManagement.ViewModels.Report.SalesReportViewModel
+
+@{
+}
+
+<div class="page">
+    <div class="page-title d-flex align-items-center gap-3">
+        <h3>Sales Report</h3>
+    </div>
+
+    <table class="dashboard-table table table-bordered mt-4" id="salesReport">
+        <thead>
+            <tr>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Total Items</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Product Category</th>
+                <th scope="col">Quantity (kg)</th>
+                <th scope="col">Price (Rs.)</th>
+                <th scope="col">Total Price (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sale in Model.SalesOrderDetails)
+            {
+                <tr>
+                    <td rowspan="@(sale.OrderItemsCount + 1)">@sale.CustomerName</td>
+                    <td rowspan="@(sale.OrderItemsCount + 1)">@sale.Date.ToShortDateString()</td>
+                    <td rowspan="@(sale.OrderItemsCount + 1)">@sale.OrderItemsCount</td>
+                </tr>
+                @foreach (var trn in sale.SalesTransactionDetails)
+                {
+                    <tr>
+                        <td>@trn.ProductName</td>
+                        <td>@trn.ProductCategory</td>
+                        <td>@trn.Quantity</td>
+                        <td>@trn.Price</td>
+                        <td>@trn.TotalPrice</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

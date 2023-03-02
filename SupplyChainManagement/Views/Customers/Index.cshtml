@@ -1,0 +1,68 @@
+﻿@model List<Customer>
+@{
+}
+
+<div class="page">
+    <div class="page-title d-flex align-items-center gap-3">
+        <h3>List Customers</h3>
+    </div>
+    <a class="btn btn-primary" asp-controller="Customers" asp-action="Create">+ Add Customer</a>
+    <table class="dashboard-table table table-bordered table-striped mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col" class="text-center">Code</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col" class="text-center">Contact</th>
+                <th scope="col">Address</th>
+                <th scope="col" class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@customer.Date.ToShortDateString()</td>
+                    <td class="text-center">@customer.CustomerCode</td>
+                    <td>@customer.CustomerName</td>
+                    <td class="text-center">@customer.Contact</td>
+                    <td>@customer.Address</td>
+                    <td class="text-center">
+                        <a class="btn btn-success" asp-controller="Customers" asp-action="Edit" asp-route-id="@customer.Id">Edit</a>
+                        <a class="btn btn-danger delete-btn" asp-controller="Customers"
+                       asp-action="Delete" asp-route-id="@customer.Id" data-id="@customer.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Delete Modal -->
+<partial name="Partial/_PartialDeleteModal" />
+
+@section Scripts {
+<script type="text/javascript">
+    $(".delete-btn").on("click", function() {
+        event.preventDefault();
+        $("#confirmDelete").attr("data-id", $(this).attr("data-id"));
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.toggle();
+    });
+
+    $("#confirmDelete").on("click", function() {
+        const url = "/Customers/Delete";
+        const id = $("#confirmDelete").attr("data-id");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { id },
+            success: function(res) {
+                if (res.success) {
+                    location.href = "/Customers";
+                }
+            }
+        });
+    });
+</script>
+}

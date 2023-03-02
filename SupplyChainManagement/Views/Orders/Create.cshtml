@@ -1,0 +1,80 @@
+﻿@model SupplyChainManagement.ViewModels.Orders.OrderCreateViewModel
+
+@{
+}
+
+<form class="form" method="post" asp-controller="Orders" asp-action="Create" style="margin: 0 auto;">
+    <div class="page page--form page--form--order">
+        <div class="page-title d-flex align-items-center gap-3">
+            <h3>Create Order</h3>
+        </div>
+        <div class="mb-3">
+            <label for="OrderCode" class="form-label">Order Code</label>
+            <input required type="text" class="form-control" name="OrderCode" id="OrderCode" placeholder="Order Code">
+        </div>
+
+        <div class="mb-3">
+            <label for="CustomerId" class="form-label">Customer</label>
+            <select  required class="form-select" name="CustomerId" id="CustomerId" asp-items="Model.CustomersList">
+                <option value="">-- Select --</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="transactionsList">
+    </div>
+
+    <div class="my-4">
+        <button id="addTransactionBtn" type="button" class="btn btn-success">+ Transaction</button>
+        <br />
+        <br />
+        <button type="submit" class="btn btn-primary">Add Order</button>
+        <button type="reset" class="btn btn-danger">Clear</button>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+ }
+
+<script>
+    $("#addTransactionBtn").click(function() {
+        var rnd = new Date().getTime();
+
+        const productsList = JSON.parse('@Html.Raw(Json.Serialize(Model.ProductsList))');
+        let options = "";
+        for (let option of productsList) {
+            options += `<option value="${option.value}">${option.text}</option>`;
+        }
+
+        const html = `
+            <div class="page page--form page--form--order" id="transactionForm">
+            <h5>Item</h5>
+                <div class="transaction">
+                    <div class="mb-3">
+                        <label for="product${rnd}" class="form-label">Product</label>
+                        <select  required class="form-select" name="product${rnd}" id="product${rnd}">
+                            <option value="">-- Select --</option>
+                            ${options}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quantity${rnd}" class="form-label">Quantity</label>
+                        <input required type="number" class="form-control" id="quantity${rnd}" name="quantity${rnd}" placeholder="Quantity">
+                    </div>
+                    <button type="button" class="btn btn-danger" id="removeTransaction">Remove</button>
+                </div>
+            </div>
+        `;
+
+        $("#transactionsList").append(html);
+    });
+
+    $(document).on('click', '#removeTransaction', function () {
+        $(this).closest("#transactionForm").remove();
+    });
+
+</script>
+}

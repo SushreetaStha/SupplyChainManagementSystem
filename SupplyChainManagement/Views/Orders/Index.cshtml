@@ -1,0 +1,107 @@
+﻿@model SupplyChainManagement.ViewModels.Orders.OrderIndexViewModel
+@{
+}
+
+<div class="page">
+    <div class="page-title d-flex align-items-center gap-3">
+        <h3>List Orders</h3>
+    </div>
+    <a class="btn btn-primary" asp-controller="Orders" asp-action="Create">+ New Order</a>
+    <a class="btn btn-success" asp-controller="Orders" asp-action="ShippedOrders">Shipped Orders</a>
+    <table class="dashboard-table table table-bordered table-striped mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col" class="text-center">Code</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Item in Stock</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.OrderDetails)
+            {
+                <tr>
+                    <td>@order.OrderDate.ToShortDateString()</td>
+                    <td class="text-center">@order.OrderCode</td>
+                    <td>@order.CustomerName</td>
+                    <td>
+                        @if (order.IsItemInStock)
+                        {
+                            <span class="text-success fw-bolder">Yes</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger fw-bolder">No</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-controller="Orders" asp-action="OrderItems" asp-route-id="@order.OrderId" class="btn btn-primary">Items</a>
+                        @if (order.IsItemInStock)
+                        {
+                            <a asp-controller="Orders" asp-action="Ship" asp-route-id="@order.OrderId" data-id="@order.OrderId" class="btn btn-success ship-btn">Ship</a>
+                        }
+                        else
+                        {
+                            <button class="btn btn-secondary" disabled>Ship</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Delete Modal -->
+<partial name="Partial/_PartialDeleteModal" />
+
+<!-- Ship Modal -->
+<partial name="Partial/_PartialShipModal" />
+
+@section Scripts {
+    <script type="text/javascript">
+        $(".delete-btn").on("click", function () {
+            event.preventDefault();
+            $("#confirmDelete").attr("data-id", $(this).attr("data-id"));
+            var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.toggle();
+        });
+
+        $("#confirmDelete").on("click", function () {
+            const url = "/Orders/Delete";
+            const id = $("#confirmDelete").attr("data-id");
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: { id },
+                success: function (res) {
+                    if (res.success) {
+                        location.href = "/Orders";
+                    }
+                }
+            });
+        });
+
+        $(".ship-btn").on("click", function () {
+            event.preventDefault();
+            $("#confirmShip").attr("data-id", $(this).attr("data-id"));
+            var shipModal = new bootstrap.Modal(document.getElementById('shipModal'));
+            shipModal.toggle();
+        });
+
+        $("#confirmShip").on("click", function () {
+            const url = "/Orders/Ship";
+            const id = $("#confirmShip").attr("data-id");
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: { id },
+                success: function (res) {
+                    if (res.success) {
+                        location.href = "/Orders";
+                    }
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,442 @@
+﻿.card {
+    margin-bottom: 1.875em;
+    border-radius: 5px;
+    padding: 0;
+    border: 0px solid transparent;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+}
+
+    .card .box-title {
+        font-weight: 600;
+        font-size: 1em;
+        padding: 5px 0;
+    }
+
+    .card .weather-title.box-title {
+        padding: 0 15px;
+        line-height: 50px;
+        background: #fff;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .card.weather-box .card-body {
+        padding-top: 0;
+    }
+
+    .card.weather-box .top {
+        background: #eceff1;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding: 20px;
+        padding-top: 22px;
+        overflow: hidden;
+    }
+
+        .card.weather-box .top .wi {
+            float: left;
+            width: 100px;
+            text-align: left;
+            padding-bottom: 10px;
+        }
+
+            .card.weather-box .top .wi:before {
+                font-size: 60px;
+            }
+
+        .card.weather-box .top .updates {
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .card.weather-box .top .currently {
+            font-size: 22px;
+            text-align: right;
+        }
+
+    .card.weather-box .middle {
+        clear: both;
+        position: relative;
+        height: 80px;
+        color: #333648;
+    }
+
+        .card.weather-box .middle .city {
+            padding-top: 15px;
+            width: 100%;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+            .card.weather-box .middle .city span {
+                font-size: 14px;
+                display: block;
+                font-weight: 400;
+            }
+
+        .card.weather-box .middle .temp {
+            position: absolute;
+            font-size: 34px;
+            top: 10px;
+            right: 0;
+        }
+
+            .card.weather-box .middle .temp span {
+                font-size: 16px;
+            }
+
+    .card.weather-box .nextdays {
+        clear: both;
+        padding-top: 22px;
+        text-align: center;
+        margin-left: -20px;
+        margin-right: -20px;
+        border-top: 1px solid #ededed;
+        background: #fff;
+        font-family: "Open Sans", sans-serif;
+    }
+
+        .card.weather-box .nextdays .days {
+            display: inline-block;
+            width: 20%;
+            font-size: 14px;
+        }
+
+            .card.weather-box .nextdays .days span {
+                display: block;
+            }
+
+    .card .card-top,
+    .card .card-footer {
+        background: #fafafa;
+        border-bottom: 1px solid #e8e9ef;
+        float: left;
+        padding: .75em 1.125em;
+        width: 100%;
+    }
+
+        .card .card-top .card-title,
+        .card .card-footer .card-title {
+            color: #343a40;
+            font-size: .875em;
+            font-weight: 600;
+            padding-top: 5px;
+            text-transform: capitalize;
+        }
+
+        .card .card-top button,
+        .card .card-footer button {
+            background: none;
+            border: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            color: #868e96;
+            font-size: 12px;
+            padding: 0 5px;
+        }
+
+        .card .card-top[class*="bg"] .card-title,
+        .card .card-footer[class*="bg"] .card-title {
+            color: #fff;
+        }
+
+        .card .card-top[class*="bg"] button,
+        .card .card-footer[class*="bg"] button {
+            color: #fff;
+        }
+
+        .card .card-top.p-0 .card-title,
+        .card .card-footer.p-0 .card-title {
+            padding: 1.125em;
+        }
+
+        .card .card-top.bg-flat-color-1,
+        .card .card-footer.bg-flat-color-1 {
+            background: #5c6bc0;
+            border: none;
+        }
+
+        .card .card-top.bg-flat-color-2,
+        .card .card-footer.bg-flat-color-2 {
+            background: #42a5f5;
+            border: none;
+        }
+
+        .card .card-top.bg-flat-color-3,
+        .card .card-footer.bg-flat-color-3 {
+            background: #ffa726;
+            border: none;
+        }
+
+        .card .card-top.bg-flat-color-4,
+        .card .card-footer.bg-flat-color-4 {
+            background: #ef5350;
+            border: none;
+        }
+
+        .card .card-top.bg-flat-color-5,
+        .card .card-footer.bg-flat-color-5 {
+            background: #4dbd74;
+            border: none;
+        }
+
+        .card .card-top.bg-flat-color-6,
+        .card .card-footer.bg-flat-color-6 {
+            background: #66bb6a;
+            border: none;
+        }
+
+    .card .card-left {
+        width: 60%;
+    }
+
+    .card .card-right {
+        width: 40%;
+    }
+
+    .card .card-body {
+        float: left;
+        padding: 1.25em;
+        position: relative;
+        width: 100%;
+    }
+
+    .card h4 {
+        font-size: 1.1rem;
+    }
+
+    .card .user-header .media img {
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+    }
+
+    .card .card-header .card-actions button {
+        display: block;
+        float: left;
+        width: 50px;
+        padding: .75rem 0;
+        margin: 0 !important;
+        color: #fff;
+        outline: 0;
+        text-align: center;
+        background: transparent;
+        border: 0;
+        border-left: 1px solid rgba(120, 130, 140, 0.4);
+    }
+
+    .card .card-footer {
+        padding: 0.65rem 1.25rem;
+        background-color: #f0f3f5;
+        border-top: 1px solid #c2cfd6;
+    }
+
+        .card .card-footer ul li {
+            display: table-cell;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+    .card .nav-tabs {
+        margin-bottom: -1px;
+    }
+
+        .card .nav-tabs a {
+            border-radius: 0;
+            color: #b5bcc2;
+            font-size: 12px;
+            font-weight: 700;
+            padding: .25em .5em;
+            text-transform: uppercase;
+        }
+
+            .card .nav-tabs a:hover {
+                border-color: transparent;
+            }
+
+        .card .nav-tabs .active a {
+            border-color: #e8e9ef;
+            color: #868e96 !important;
+        }
+
+/*    Widget One
+---------------------------*/
+.dib {
+    display: inline-block;
+}
+
+.stat-widget-one .stat-icon {
+    vertical-align: top;
+}
+
+    .stat-widget-one .stat-icon i {
+        font-size: 30px;
+        border-width: 3px;
+        border-style: solid;
+        border-radius: 100px;
+        padding: 15px;
+        font-weight: 900;
+        display: inline-block;
+    }
+
+.stat-widget-one .stat-content {
+    margin-left: 30px;
+    margin-top: 7px;
+}
+
+.stat-widget-one .stat-text {
+    font-size: 14px;
+    color: #868e96;
+}
+
+.stat-widget-one .stat-digit {
+    font-size: 24px;
+    color: #373757;
+}
+
+/*    Widget Two
+---------------------------*/
+.stat-widget-two {
+    text-align: center;
+}
+
+    .stat-widget-two .stat-digit {
+        font-size: 1.75rem;
+        font-weight: 500;
+        color: #373757;
+    }
+
+        .stat-widget-two .stat-digit i {
+            font-size: 18px;
+            margin-right: 5px;
+        }
+
+    .stat-widget-two .stat-text {
+        font-size: 16px;
+        margin-bottom: 5px;
+        color: #868e96;
+    }
+
+    .stat-widget-two .progress {
+        height: 8px;
+        margin-bottom: 0;
+        margin-top: 20px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .stat-widget-two .progress-bar {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+/*    Widget Three
+---------------------------*/
+.stat-widget-three .stat-icon {
+    display: inline-block;
+    padding: 33px;
+    position: absolute;
+    line-height: 21px;
+}
+
+    .stat-widget-three .stat-icon i {
+        font-size: 30px;
+        color: #ffffff;
+    }
+
+.stat-widget-three .stat-content {
+    text-align: center;
+    padding: 15px;
+    margin-left: 90px;
+}
+
+.stat-widget-three .stat-digit {
+    font-size: 30px;
+}
+
+.stat-widget-three .stat-text {
+    padding-top: 4px;
+}
+
+.home-widget-three .stat-icon {
+    line-height: 19px;
+    padding: 27px;
+}
+
+.home-widget-three .stat-digit {
+    font-size: 24px;
+    font-weight: 300;
+    color: #373757;
+}
+
+.home-widget-three .stat-content {
+    text-align: center;
+    margin-left: 60px;
+    padding: 13px;
+}
+
+/*    Widget Four
+---------------------------*/
+.stat-widget-four {
+    position: relative;
+}
+
+    .stat-widget-four .stat-icon {
+        display: inline-block;
+        position: absolute;
+        top: 5px;
+    }
+
+    .stat-widget-four i {
+        display: block;
+        font-size: 36px;
+    }
+
+    .stat-widget-four .stat-content {
+        margin-left: 40px;
+        text-align: center;
+    }
+
+    .stat-widget-four .stat-heading {
+        font-size: 20px;
+    }
+
+/*    Widget Five
+---------------------------*/
+.stat-widget-five {
+    min-height: 60px;
+}
+
+    .stat-widget-five .stat-icon {
+        font-size: 50px;
+        line-height: 50px;
+        position: absolute;
+        left: 30px;
+        top: 20px;
+    }
+
+    .stat-widget-five .stat-content {
+        margin-left: 100px;
+    }
+
+    .stat-widget-five .stat-text {
+        color: #455a64;
+        font-size: 20px;
+    }
+
+    .stat-widget-five .stat-heading {
+        color: #99abb4;
+        font-size: 14px;
+    }
+
+.horizontal:before {
+    background: #ffffff;
+    bottom: 0;
+    content: "";
+    height: 38px;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    width: 1px;
+}

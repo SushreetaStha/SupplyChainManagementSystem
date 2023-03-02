@@ -1,0 +1,52 @@
+﻿@model SupplyChainManagement.ViewModels.Customers.CustomerCreateViewModel
+
+@{
+}
+
+<div class="page page--form">
+    <div class="page-title d-flex align-items-center gap-3">
+        <h3>Create Customer</h3>
+    </div>
+    <form class="form" method="post" asp-controller="Customers" asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="CustomerCode" class="form-label">Customer Code</label>
+            <input type="text" class="form-control" asp-for="CustomerCode" placeholder="Customer Code">
+            <span class="text-danger" asp-validation-for="CustomerCode"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CustomerName" class="form-label">Customer Name</label>
+            <input type="text" class="form-control" asp-for="CustomerName" placeholder="Customer Name">
+            <span class="text-danger" asp-validation-for="CustomerName"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Date" class="form-label">Date</label>
+            <input type="date" class="form-control" asp-for="Date">
+            <span class="text-danger" asp-validation-for="Date"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Contact" class="form-label">Contact</label>
+            <input type="text" class="form-control" asp-for="Contact" placeholder="Contact">
+            <span class="text-danger" asp-validation-for="Contact"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label">Address</label>
+            <input type="text" class="form-control" asp-for="Address" placeholder="Address">
+            <span class="text-danger" asp-validation-for="Address"></span>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Add Customer</button>
+            <button type="reset" class="btn btn-danger">Clear</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+ }
+}

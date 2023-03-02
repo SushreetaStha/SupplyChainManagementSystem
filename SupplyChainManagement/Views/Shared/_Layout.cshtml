@@ -1,0 +1,104 @@
+﻿@{
+    User user = (User)Context.Items["User"]!;
+    string username = string.Empty;
+    Role role = Role.User;
+    if (user != null)
+    {
+        username = user.Username;
+        role = user.Role;
+    }
+}
+
+<html>
+<head>
+    <title>SCMS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/sidebars.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/lib/stroke-7-icons/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />
+</head>
+<body>
+    <main>
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+            <a href="/" class="logo d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <span class="fs-4">SCMS</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li>
+                    <a asp-controller="Home" asp-action="Index" class="nav-link text-white d-flex align-items-center">
+                        <i class="bi bi-grid-fill"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Orders" asp-action="Index" class="nav-link text-white d-flex align-items-center">
+                        <i class="bi bi-chat-square-text-fill"></i>
+                        Orders
+                    </a>
+                </li>
+                @if (role == Role.Admin)
+                {
+                    <li>
+                        <a asp-controller="Products" asp-action="Index" class="nav-link text-white d-flex align-items-center">
+                            <i class="bi bi-bag-fill"></i>
+                            Products
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="RawMaterials" asp-action="Index" class="nav-link text-white d-flex align-items-center">
+                            <i class="bi bi-cart-fill"></i>
+                            Raw Materials
+                        </a>
+                    </li>
+                }
+                <li>
+                    <a asp-controller="Customers" asp-action="Index" class="nav-link text-white d-flex align-items-center">
+                        <i class="bi bi-person-fill"></i>
+                        Customers
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Suppliers" asp-action="Index" class="nav-link text-white d-flex align-items-center">
+                        <i class="bi bi-person-lines-fill"></i>
+                        Suppliers
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Report" asp-action="SalesReport" class="nav-link text-white d-flex align-items-center">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        Sales Reports
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle mx-2"></i>
+                    <strong>@username</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" asp-controller="Users" asp-action="Logout">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container overflow-auto px-4">
+            @RenderBody()
+        </div>
+    </main>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/chartjs/dist/chart.js"></script>
+    <script src="~/js/sidebars.js"></script>
+    <script src="~/js/active-link.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
